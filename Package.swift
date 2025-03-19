@@ -40,7 +40,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/Rallista/valhalla-openapi-models-swift.git", exact: "0.0.4"),
+            url: "https://github.com/nortiz1349/valhalla-openapi-models-swift.git", from: "0.0.4"),
         .package(url: "https://github.com/UInt2048/Light-Swift-Untar.git", from: "1.0.4"),
     ],
     targets: [
