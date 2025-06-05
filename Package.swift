@@ -1,29 +1,6 @@
 // swift-tools-version:5.8
 import PackageDescription
 
-// Use the local binary if true
-let useLocalBinary = Context.environment["VALHALLA_MOBILE_DEV"].flatMap(Bool.init) ?? false
-
-// Use the local binary
-var binaryTarget: Target = .binaryTarget(
-    name: "ValhallaWrapper",
-    path: "build/apple/valhalla-wrapper.xcframework"
-)
-
-// CI will replace the nils with the actual values when building a release
-let version: String = "0.1.7"
-let binaryURL: String =
-    "https://github.com/Rallista/valhalla-mobile/releases/download/\(version)/valhalla-wrapper.xcframework.zip"
-let binaryChecksum: String = "4b3b97dcd5e10f08e32d8517b90b7bd819b9eaf2b4c7493b2de8da89717ad43c"
-
-if !useLocalBinary {
-    binaryTarget = .binaryTarget(
-        name: "ValhallaWrapper",
-        url: binaryURL,
-        checksum: binaryChecksum
-    )
-}
-
 let package = Package(
     name: "ValhallaMobile",
     platforms: [
@@ -39,9 +16,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(
-            url: "https://github.com/nortiz1349/valhalla-openapi-models-swift.git", from: "0.0.4"),
-        .package(url: "https://github.com/UInt2048/Light-Swift-Untar.git", from: "1.0.4"),
+        .package(url: "https://github.com/nortiz1349/valhalla-openapi-models-swift.git", from: "0.0.4"),
+        .package(url: "https://github.com/nortiz1349/Light-Swift-Untar.git", from: "1.0.5"),
     ],
     targets: [
         .target(
@@ -53,7 +29,7 @@ let package = Package(
                 .product(name: "ValhallaModels", package: "valhalla-openapi-models-swift"),
                 .product(name: "Light-Swift-Untar", package: "Light-Swift-Untar"),
             ],
-            path: "apple/Sources/Valhalla",
+            path: "Sources/Valhalla",
             resources: [
                 .process("SupportData")
             ]
@@ -61,15 +37,13 @@ let package = Package(
         .target(
             name: "ValhallaObjc",
             dependencies: ["ValhallaWrapper"],
-            path: "apple/Sources/ValhallaObjc",
+            path: "Sources/ValhallaObjc",
             linkerSettings: [.linkedLibrary("z")]
         ),
-        binaryTarget,
-        .testTarget(
-            name: "ValhallaTests",
-            dependencies: ["Valhalla"],
-            path: "apple/Tests/ValhallaTests",
-            resources: [.copy("TestData")]
+        .binaryTarget(
+            name: "ValhallaWrapper",
+            url: "https://github.com/Rallista/valhalla-mobile/releases/download/0.1.7/valhalla-wrapper.xcframework.zip",
+            checksum: "4b3b97dcd5e10f08e32d8517b90b7bd819b9eaf2b4c7493b2de8da89717ad43c"
         ),
     ],
     cLanguageStandard: .gnu17,

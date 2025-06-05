@@ -12,10 +12,10 @@
     {
       "identity" : "light-swift-untar",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/UInt2048/Light-Swift-Untar.git",
+      "location" : "https://github.com/nortiz1349/Light-Swift-Untar.git",
       "state" : {
-        "revision" : "fcff1f1b82373ea64b9565a364f63ffe7fdecf9f",
-        "version" : "1.0.4"
+        "revision" : "b1d63e0c3904c31244c6c0d466e1e42d29423834",
+        "version" : "1.0.5"
       }
     },
     {
