@@ -4,10 +4,8 @@ import PackageDescription
 let package = Package(
     name: "ValhallaMobile",
     platforms: [
-        .iOS("16.4")
-        // .tvOS(.v13),
-        // .watchOS(.v6),
-        // .macOS(.v10_13)
+        .iOS("16.3"),
+        .macOS("13")
     ],
     products: [
         .library(
@@ -42,9 +40,9 @@ let package = Package(
         ),
         .binaryTarget(
             name: "ValhallaWrapper",
-            url: "https://github.com/Rallista/valhalla-mobile/releases/download/0.1.7/valhalla-wrapper.xcframework.zip",
-            checksum: "4b3b97dcd5e10f08e32d8517b90b7bd819b9eaf2b4c7493b2de8da89717ad43c"
-        ),
+            url: "https://github.com/nortiz1349/valhalla-mobile/releases/download/0.2.1/valhalla-wrapper.xcframework.zip",
+            checksum: "21db1c87c47177ec886bb190b85964822be30de64fb9f3861578bc1b4d4da3bd"
+        )
     ],
     cLanguageStandard: .gnu17,
     cxxLanguageStandard: .cxx17
